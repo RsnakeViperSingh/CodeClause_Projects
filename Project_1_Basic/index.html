@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unit Converter</title>
+  <style>
+    /* CSS styles for the converter */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      margin: 20px auto;
+      max-width: 400px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    input[type="number"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    
+    select {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    
+    #result {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Unit Converter</h2>
+    <label for="fromValue">From:</label>
+    <input type="number" id="fromValue">
+    <label for="fromUnit">Unit:</label>
+    <select id="fromUnit">
+      <option value="m">Meter</option>
+      <option value="cm">Centimeter</option>
+      <option value="km">Kilometer</option>
+    </select>
+    <label for="toUnit">To:</label>
+    <select id="toUnit">
+      <option value="m">Meter</option>
+      <option value="cm">Centimeter</option>
+      <option value="km">Kilometer</option>
+    </select>
+    <button onclick="convert()">Convert</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function convert() {
+      var fromValue = document.getElementById("fromValue").value;
+      var fromUnit = document.getElementById("fromUnit").value;
+      var toUnit = document.getElementById("toUnit").value;
+      var result = "";
+
+      // Conversion logic
+      if (fromUnit === "m" && toUnit === "cm") {
+        result = fromValue * 100 + " cm";
+      } else if (fromUnit === "cm" && toUnit === "m") {
+        result = fromValue / 100 + " m";
+      } else if (fromUnit === "m" && toUnit === "km") {
+        result = fromValue / 1000 + " km";
+      } else if (fromUnit === "km" && toUnit === "m") {
+        result = fromValue * 1000 + " m";
+      } else if (fromUnit === "cm" && toUnit === "km") {
+        result = fromValue / 100000 + " km";
+      } else if (fromUnit === "km" && toUnit === "cm") {
+        result = fromValue * 100000 + " cm";
+      } else {
+        result = "Invalid conversion";
+      }
+
+      document.getElementById("result").textContent = result;
+    }
+  </script>
+</body>
+</html>
