@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Golden Project</title>
+	<style type="text/css">
+		/* import fonts */
+
+@import url('https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed|Open+Sans');
+
+/* styling */
+* {
+	margin: 0px;
+	padding: 0px;
+	outline: none;
+	font-family: "Barlow Semi Condensed", "Open Sans", sans-serif;
+}
+
+body {
+	width: 100vw !important;
+	height: 100vh !important;
+	background: #202333;
+	position: relative;
+	overflow: hidden;
+}
+
+.name {
+	float: left;
+	width: auto;
+	height: 36px;
+	color: #5B6986;
+	border-right: 1px solid #202333;
+	padding: 12px 15px;
+}
+
+/* STYLES FOR THE HEADER */
+header, .bottom-toolbar {
+	position: absolute;
+	width: 100%;
+	height: 45px;
+	background: #2b3046;
+	z-index: 1;
+}
+
+header ul {
+	width: auto;
+	height: 36px;
+	display: inline-block;
+	list-style-type: none;
+	float: left;
+}
+
+header ul > li {
+	float: left;
+	margin-top: 12px;
+	margin-left: 13px;
+	color: #5B6986;
+	cursor: default;
+	transition: all 0.1s linear;
+}
+
+header ul > li:hover {
+	color: #8EA4D2;
+}
+
+/* STYLES FOT THE TABS SECTIONS */
+.tabs {
+	float: left;
+	width: 50%;
+	height: 30px;
+	margin-top: 8px;
+	margin-left: 30px;
+}
+
+.tab {
+	float: left;
+	width: 120px;
+	height: 30px;
+	background: transparent;
+	margin-left: 3px;
+}
+
+.tab p {
+	cursor: default;
+	float: left;
+	margin-left: 10px;
+	margin-top: 4px;
+	color: #8EA4D2;
+}
+
+.tab .closeTab {
+	cursor: pointer;
+	float: right;
+	width: 20px;
+	height: 20px;
+	margin-top: 6px;
+	margin-right: 5px;
+	background: none;
+	border: none;
+	opacity: 0.45;
+	transition: all 0.1s linear;
+}
+
+.tab .closeTab:hover {
+	opacity: 1;
+}
+
+.tabs .active, .mobileTabs .active {
+	border-radius: 6px;
+	background: #12141C;
+}
+
+/* STYLES FOR TOOLS SECTION */
+.toolTrigger, .tabsIndex {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	right: 10px;
+	bottom: 32px;
+	border: none;
+	border-radius: 100%;
+	cursor: pointer;
+	background: #2b3046;
+	transition: all 0.1s linear;
+	z-index: 4;
+}
+
+.toolTrigger:hover, .tabsIndex:hover {
+	background: #4E5A73;
+}
+
+.tabsIndex {
+	display: none;
+	right: 70px;
+}
+
+.tools {
+	position: absolute;
+	bottom: 90px;
+	right: 10px;
+	width: 50px;
+	height: auto;
+	z-index: 5;
+}
+
+.tools .tool {
+	width: 36px;
+	height: 36px;
+	border: none;
+	background: #2b3046;
+	border-radius: 100%;
+	margin-top: 6px;
+	margin-left: 7px;
+	cursor: pointer;
+	display: none;
+}
+
+.tools .tool:hover {
+	background: #4E5A73;
+}
+
+/* STYLES FOR THE EDITOR CONTAINER */
+.editor {
+	position: absolute;
+	width: 100vw;
+	height: calc(100vh - 65px);
+	background: #12141C;
+	top: 45px;
+	right: 0px;
+	z-index: 1;
+}
+
+.bottom-toolbar {
+	height: 20px;
+	bottom: 0px;
+}
+
+.bottom-toolbar .FileInfo {
+	float: right;
+	margin-right: 10px;
+	margin-top: 2px;
+	font-size: 0.75em;
+	color: #8EA4D2;
+	cursor: default;
+}
+
+/* Mobile Specific Elements */
+.mobileTabs {
+	width: 100vw;
+	height: 50vh;
+	position: absolute;
+	background: #2b3046;
+	bottom: 21px;
+	left: 0px;
+	z-index: 1;
+	padding: 20px 0px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	display: none;
+}
+
+.mobileTabs .tab {
+	float: left;
+	width: 90%;
+	height: 40px;
+	margin-left: 5%;
+	margin-bottom: 8px;
+}
+
+.mobileTabs .tab p {
+	margin-top: 9px;
+}
+
+.mobileTabs .tab .closeTab {
+	margin-top: 11px;
+}
+
+.mobileMenu {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	left: 7px;
+	top: 3px;
+	border: none;
+	border-radius: 100%;
+	border-bottom: 1px solid #2b3046;
+	background: none;
+	display: none;
+	transition: background 0.12s ease-in-out;
+}
+
+.mobileMenu:hover {
+	background: #12141C;
+}
+
+nav {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 9998;
+	display: none;
+	background: rgba(0, 0, 0, 0.6);
+}
+
+nav > ul {
+	position: absolute;
+	width: 80%;
+	height: 70vh;
+	top: 10vh;
+	left: 10%;
+	background: #FFF;
+	border-radius: 3px;
+	list-style-type: none;
+}
+
+.mobileLI {
+	width: calc(100% - 10px);
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+	vertical-align: center; 
+	text-align: center;
+	background: #222;
+}
+
+/* Responsivity Parameters */
+@media screen and (max-width: 770px) {
+	.tabsIndex, .mobileMenu {
+		display: block;
+	}
+	
+	.tabs, header > ul {
+		display: none;
+	}
+}
+
+	</style>
+</head>
+
+
+<body>
+<header>
+	<button class="mobileMenu">
+		<svg style="width:24px;height:24px" viewBox="0 -1 24 24">
+    <path fill="#8EA4D2" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+</svg>
+	</button>
+	
+	<ul>
+		<li>File</li>
+		<li>Edit</li>
+		<li>View</li>
+		<li>Preferences</li>
+		<li>About</li>
+	</ul>
+	
+<section class="tabs">
+	<div class="tab active">
+		<p>
+			active.file
+		</p>
+		
+		<button class="closeTab">
+			<svg style="width:16px;height:16px" viewBox="0 0 24 24">
+    <path fill="#8EA4D2" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+</svg>
+		</button>
+	</div>
+	
+	<div class="tab">
+		<p>
+			song2.blur
+		</p>
+		
+		<button class="closeTab">
+			<svg style="width:16px;height:16px" viewBox="0 0 24 24">
+    <path fill="#8EA4D2" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+</svg>
+		</button>
+	</div>
+</section>
+</header>
+
+<nav>
+	<ul>
+		<li class="mobileLI">File</li>
+		<li class="mobileLI">Edit</li>
+		<li class="mobileLI">View</li>
+		<li class="mobileLI">Preferences</li>
+		<li class="mobileLI">About</li>
+	</ul>
+</nav>
+
+<section class="editor">
+	<!-- EDITOR PLUGIN GOES HERE -->
+	<h1 style="color: #8EA4D2; text-align: center; margin-top: 200px;">
+		CodeClause Golden Code Editor
+	</h1>
+</section>
+
+<section class="bottom-toolbar">
+	<div class="FileInfo">
+		Line 32, Column 64 - 128 Lines
+	</div>
+</section>
+
+<button class="toolTrigger">
+	<svg style="width:24px;height:24px" viewBox="0 -1 24 24">
+    <path fill="#8EA4D2" d="M16,20H20V16H16M16,14H20V10H16M10,8H14V4H10M16,8H20V4H16M10,14H14V10H10M4,14H8V10H4M4,20H8V16H4M10,20H14V16H10M4,8H8V4H4V8Z" />
+	</svg>
+</button>
+
+<button class="tabsIndex">
+	<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+    <path fill="#8EA4D2" d="M19,19H5V5H12V9H19M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" />
+</svg>
+</button>
+
+<div class="tools">
+	<button class="tool fileTree">
+		<svg style="width:24px;height:24px" viewBox="-2 -3 28 28">
+    <path fill="#8EA4D2" d="M3,3H9V7H3V3M15,10H21V14H15V10M15,17H21V21H15V17M13,13H7V18H13V20H7L5,20V9H7V11H13V13Z" />
+	</svg>
+	</button>
+	<button class="tool search">
+		<svg style="width:24px;height:24px" viewBox="-2 -3 28 28">
+    <path fill="#8EA4D2" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" />
+	</svg>
+	</button>
+	<button class="tool indent-code">
+		<svg style="width:24px;height:24px" viewBox="-2 -3 28 28">
+    <path fill="#8EA4D2" d="M11,13H21V11H11M11,9H21V7H11M3,3V5H21V3M11,17H21V15H11M3,8V16L7,12M3,21H21V19H3V21Z" />
+	</svg>
+	</button>
+	<button class="tool color-pick">
+		<svg style="width:24px;height:24px" viewBox="-2 -3 28 28">
+    <path fill="#8EA4D2" d="M17.5,12A1.5,1.5 0 0,1 16,10.5A1.5,1.5 0 0,1 17.5,9A1.5,1.5 0 0,1 19,10.5A1.5,1.5 0 0,1 17.5,12M14.5,8A1.5,1.5 0 0,1 13,6.5A1.5,1.5 0 0,1 14.5,5A1.5,1.5 0 0,1 16,6.5A1.5,1.5 0 0,1 14.5,8M9.5,8A1.5,1.5 0 0,1 8,6.5A1.5,1.5 0 0,1 9.5,5A1.5,1.5 0 0,1 11,6.5A1.5,1.5 0 0,1 9.5,8M6.5,12A1.5,1.5 0 0,1 5,10.5A1.5,1.5 0 0,1 6.5,9A1.5,1.5 0 0,1 8,10.5A1.5,1.5 0 0,1 6.5,12M12,3A9,9 0 0,0 3,12A9,9 0 0,0 12,21A1.5,1.5 0 0,0 13.5,19.5C13.5,19.11 13.35,18.76 13.11,18.5C12.88,18.23 12.73,17.88 12.73,17.5A1.5,1.5 0 0,1 14.23,16H16A5,5 0 0,0 21,11C21,6.58 16.97,3 12,3Z" />
+	</svg>
+	</button>
+</div>
+
+<div class="mobileTabs">
+	<div class="tab active">
+		<p>
+			index.php
+		</p>
+		
+		<button class="closeTab">
+			<svg style="width:16px;height:16px" viewBox="0 0 24 24">
+    <path fill="#8EA4D2" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+</svg>
+		</button>
+	</div>
+	
+	<div class="tab">
+		<p>
+			golden.html
+		</p>
+		
+		<button class="closeTab">
+			<svg style="width:16px;height:16px" viewBox="0 0 24 24">
+    <path fill="#8EA4D2" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+</svg>
+		</button>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+var allTools = ".fileTree, .search, .indent-code, .color-pick";
+var allElement = ".editor";
+
+$(document).ready(function(){
+	$(".toolTrigger").click(function(){
+		$(allTools).toggle();
+	});
+	
+	$(".tabsIndex").click(function(){
+		$(".mobileTabs").toggle();
+	});
+	
+	$(".editor, header").click(function(){
+		$(".mobileTabs").hide();
+	});
+});
+</script>
+
+
+</body>
+</html>
